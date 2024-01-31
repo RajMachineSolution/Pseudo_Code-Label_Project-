@@ -1,0 +1,118 @@
+Pseudo code for sharable_array_ClassComponent:-
+                               This class component has two  classes named DatabaseHandler.vb for data connection and Class1.vb which provides a sharable int16 array.
+
+      
+ DatabaseHandler.vb----
+
+    public class DatabaseHandler
+        
+         Dim  connectionstring as String= "Data Source=desktop-asus;Initial Catalog=sahil;Integrated Security=True"
+
+
+
+      
+        public function RetrieveValuesAsArray() As Int16()
+
+
+
+          // int16List As New List(of Int16) which contains elements that was fetched from " D from 1000 where sno=1 " after getting converted from string to int16
+
+  
+           Dim int16Array as Int16()= int16List.ToArray()
+           return int16Array
+
+    
+        End Function
+
+End Class
+
+
+-----------
+
+Class1.vb
+
+Public Class Class1
+
+  
+   Public Shared array12() As Int16
+
+ 
+
+   Public Shared Function SetShareablearray() As Int16()
+        Dim vbr As New DatabaseHandler
+
+        Dim int16Array As Int16() = vbr.RetrieveValuesAsArray()
+
+        array12 = int16Array.ToArray
+        Return array12
+
+   End Function
+
+End Class
+
+
+----------------------------------------------------------
+
+Pseudo_code for UserControl:- 
+
+UserControl.vb---
+  
+  Public Class UserControl1
+    
+       Dim m,n as Integer
+      
+       Public Shared str As String
+       
+       Public Property startingnum() As Integer
+        Get
+            Return m
+        End Get
+        Set(value As Integer)
+            m = value
+        End Set
+    End Property
+
+        Public Property consecutivenum() As Integer
+        Get
+            Return n
+        End Get
+        Set(value As Integer)
+            n = value
+        End Set
+    End Property
+
+
+
+ Public  Function result(ar() As Short) 
+
+ 
+      Dim i As Integer
+    
+
+     Dim newArray() As Short = ar
+      
+    For i=m To n-1
+    
+      If str="" Then
+       str= str + "" + newArray(i).ToString
+     
+      Else
+       str= str + "," + newArray(i).ToString
+
+      End If 
+
+    Next i
+   
+  Label1.Text = str
+   
+   
+
+   End Function      
+
+End Class                      
+   
+
+
+
+       
+  
